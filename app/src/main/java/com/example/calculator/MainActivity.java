@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (operationLength == 0) {
             tvInput.setText(tvInput.getText() + "(");
             dotUsed = false;
-            totalParentheses++;
+            totalParentheses++; //( )
             checked = true;
         } else if (totalParentheses > 0 && operationLength > 0) {
             String lastInput = tvInput.getText().charAt(operationLength - 1) + "";
@@ -229,8 +229,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (operationLength > 0) {
             String lastInput = tvInput.getText().charAt(operationLength - 1) + "";
 
-            if ((lastInput.equals("+") || lastInput.equals("-") || lastInput.equals("×") || lastInput.equals("÷") || lastInput.equals("%"))) {
-                Toast.makeText(getApplicationContext(), "Wrong format", Toast.LENGTH_LONG).show();
+            if ((lastInput.equals("+") || lastInput.equals("-") || lastInput.equals("×")
+                    || lastInput.equals("÷") || lastInput.equals("%"))) {
+                Toast.makeText(getApplicationContext(), "Sai định dạng", Toast.LENGTH_SHORT).show();
             } else if (operator.equals("%") && checkLastCharacter(lastInput) == IS_NUMBER) {
                 tvInput.setText(tvInput.getText() + operator);
                 dotUsed = false;
@@ -241,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 checked = true;
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Wrong Format. operator Without any numbers?", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Sai địng dạng. Thiếu toán hạng!", Toast.LENGTH_SHORT).show();
         }
         return checked;
     }
@@ -305,13 +306,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (result.equals("Infinity")) { //  2/0
                 tvInput.setText(input);
-            } else if (result.contains(".")) { //  125.0 = 125
+            } else if (result.contains(".")) { //  125.0 = 125 vi scriptEngine cho ket qua thap phan
                 result = result.replaceAll("\\.?0*$", "");
                 tvResult.setText(result);
             }
         } catch (Exception e) {
             tvResult.setText("undefined");
-            Toast.makeText(getApplicationContext(), "Wrong Format", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sai định dạng", Toast.LENGTH_SHORT).show();
 //            return;
         }
     }
